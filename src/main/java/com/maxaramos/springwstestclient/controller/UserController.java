@@ -27,7 +27,7 @@ public class UserController {
 	public String add(User user, Model model) {
 		User addedUser = userWsClient.addUser(user);
 		model.addAttribute("user", addedUser);
-		return "/user/success";
+		return "/user/get";
 	}
 
 	@GetMapping("/get")
@@ -48,14 +48,14 @@ public class UserController {
 	public String update(User user, Model model) {
 		User updatedUser = userWsClient.updateUser(user);
 		model.addAttribute("user", updatedUser);
-		return "/user/success";
+		return "/user/get";
 	}
 
 	@PostMapping("/delete")
 	public String delete(Long id, Model model) {
 		boolean deleted = userWsClient.deleteUser(id);
 		model.addAttribute("deleted", deleted);
-		return "/user/success";
+		return "/user/get";
 	}
 
 }

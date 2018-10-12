@@ -27,7 +27,7 @@ public class AddressController {
 	public String add(Address address, Model model) {
 		Address addedAddress = addressWsClient.addAddress(address);
 		model.addAttribute("address", addedAddress);
-		return "/address/success";
+		return "/address/get";
 	}
 
 	@GetMapping("/get")
@@ -48,14 +48,14 @@ public class AddressController {
 	public String update(Address address, Model model) {
 		Address updatedAddress = addressWsClient.updateAddress(address);
 		model.addAttribute("address", updatedAddress);
-		return "/address/success";
+		return "/address/get";
 	}
 
 	@PostMapping("/delete")
 	public String delete(Long id, Model model) {
 		boolean deleted = addressWsClient.deleteAddress(id);
 		model.addAttribute("deleted", deleted);
-		return "/address/success";
+		return "/address/get";
 	}
 
 }
