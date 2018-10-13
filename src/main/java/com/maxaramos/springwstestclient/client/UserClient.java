@@ -68,6 +68,7 @@ public class UserClient {
 	public static User fromResponse(AddUserResponse response) {
 		UserType userType = response.getUser();
 		User user = new User();
+		user.setId(userType.getId());
 		user.setUsername(userType.getUsername());
 		user.setPassword(userType.getPassword());
 		return user;
