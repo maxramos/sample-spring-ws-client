@@ -16,26 +16,26 @@ import com.maxaramos.springwstestclient.model.Address;
 public class AddressController {
 
 	@Autowired
-	private AddressClient addressWsClient;
+	private AddressClient addressClient;
 
 	@PutMapping("/add")
 	public Address add(Address address) {
-		return addressWsClient.addAddress(address);
+		return addressClient.addAddress(address);
 	}
 
 	@GetMapping("/get")
 	public Address get(Long id) {
-		return addressWsClient.getAddress(id);
+		return addressClient.getAddress(id);
 	}
 
 	@PostMapping("/update")
 	public Address update(Address address) {
-		return addressWsClient.updateAddress(address);
+		return addressClient.updateAddress(address);
 	}
 
 	@DeleteMapping("/delete")
 	public boolean delete(Long id) {
-		return addressWsClient.deleteAddress(id);
+		return addressClient.deleteAddress(id);
 	}
 
 }

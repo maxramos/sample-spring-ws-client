@@ -16,26 +16,26 @@ import com.maxaramos.springwstestclient.model.User;
 public class UserController {
 
 	@Autowired
-	private UserClient userWsClient;
+	private UserClient userClient;
 
 	@PutMapping("/add")
 	public User add(User user) {
-		return userWsClient.addUser(user);
+		return userClient.addUser(user);
 	}
 
 	@GetMapping("/get")
 	public User get(Long id) {
-		return userWsClient.getUser(id);
+		return userClient.getUser(id);
 	}
 
 	@PostMapping("/update")
 	public User update(User user) {
-		return userWsClient.updateUser(user);
+		return userClient.updateUser(user);
 	}
 
 	@DeleteMapping("/delete")
 	public boolean delete(Long id) {
-		return userWsClient.deleteUser(id);
+		return userClient.deleteUser(id);
 	}
 
 }
