@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maxaramos.springwstestclient.client.AddressClient;
 import com.maxaramos.springwstestclient.model.Address;
-import com.maxaramos.springwstestclient.wsclient.AddressWsClient;
 
 @RestController
 @RequestMapping("/address")
 public class AddressController {
 
 	@Autowired
-	private AddressWsClient addressWsClient;
+	private AddressClient addressWsClient;
 
 	@PutMapping("/add")
 	public Address add(Address address) {

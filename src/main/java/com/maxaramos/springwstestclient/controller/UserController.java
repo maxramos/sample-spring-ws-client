@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maxaramos.springwstestclient.client.UserClient;
 import com.maxaramos.springwstestclient.model.User;
-import com.maxaramos.springwstestclient.wsclient.UserWsClient;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
 	@Autowired
-	private UserWsClient userWsClient;
+	private UserClient userWsClient;
 
 	@PutMapping("/add")
 	public User add(User user) {

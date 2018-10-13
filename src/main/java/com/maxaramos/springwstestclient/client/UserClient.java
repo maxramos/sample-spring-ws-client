@@ -1,4 +1,4 @@
-package com.maxaramos.springwstestclient.wsclient;
+package com.maxaramos.springwstestclient.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +18,7 @@ import com.maxaramos.springwstest.user.UserType;
 import com.maxaramos.springwstestclient.model.User;
 
 @Component
-public class UserWsClient {
+public class UserClient {
 
 	@Autowired
 	private WebServiceTemplate webServiceTemplate;
@@ -62,7 +62,7 @@ public class UserWsClient {
 		request.setId(id);
 
 		DeleteUserResponse response = (DeleteUserResponse) webServiceTemplate.marshalSendAndReceive(request);
-		return response.isResult();
+		return response.isDeleted();
 	}
 
 	public static User fromResponse(AddUserResponse response) {

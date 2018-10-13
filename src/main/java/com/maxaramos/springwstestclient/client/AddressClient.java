@@ -1,4 +1,4 @@
-package com.maxaramos.springwstestclient.wsclient;
+package com.maxaramos.springwstestclient.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +18,7 @@ import com.maxaramos.springwstest.address.UpdateAddressResponse;
 import com.maxaramos.springwstestclient.model.Address;
 
 @Component
-public class AddressWsClient {
+public class AddressClient {
 
 	@Autowired
 	private WebServiceTemplate webServiceTemplate;
@@ -70,7 +70,7 @@ public class AddressWsClient {
 		request.setId(id);
 
 		DeleteAddressResponse response = (DeleteAddressResponse) webServiceTemplate.marshalSendAndReceive(request);
-		return response.isResult();
+		return response.isDeleted();
 	}
 
 	public static Address fromResponse(AddAddressResponse response) {
