@@ -6,7 +6,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
 @Configuration
-public class WebServiceClientConfig {
+public class WsClientConfig {
 
 	@Bean
 	public WebServiceTemplate webServiceTemplate() {
