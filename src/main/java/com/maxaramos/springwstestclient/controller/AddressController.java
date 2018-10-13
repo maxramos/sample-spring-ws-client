@@ -1,5 +1,6 @@
 package com.maxaramos.springwstestclient.controller;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,25 +17,32 @@ import com.maxaramos.springwstestclient.model.Address;
 public class AddressController {
 
 	@Autowired
+	private Logger log;
+
+	@Autowired
 	private AddressClient addressClient;
 
 	@PutMapping("/add")
 	public Address add(Address address) {
+		log.info("add: " + address);
 		return addressClient.addAddress(address);
 	}
 
 	@GetMapping("/get")
 	public Address get(Long id) {
+		log.info("get: " + id);
 		return addressClient.getAddress(id);
 	}
 
 	@PostMapping("/update")
 	public Address update(Address address) {
+		log.info("update: " + address);
 		return addressClient.updateAddress(address);
 	}
 
 	@DeleteMapping("/delete")
 	public boolean delete(Long id) {
+		log.info("delete: " + id);
 		return addressClient.deleteAddress(id);
 	}
 
