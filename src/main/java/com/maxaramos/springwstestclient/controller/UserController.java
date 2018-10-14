@@ -1,5 +1,7 @@
 package com.maxaramos.springwstestclient.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,12 @@ public class UserController {
 
 	@Autowired
 	private UserClient userClient;
+
+	@GetMapping("/getAll")
+	public List<User> getAll() {
+		log.info("getAll");
+		return userClient.getAllUser();
+	}
 
 	@PutMapping("/add")
 	public User add(@RequestBody User user) {

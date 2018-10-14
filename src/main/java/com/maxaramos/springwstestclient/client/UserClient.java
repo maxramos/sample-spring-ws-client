@@ -1,5 +1,8 @@
 package com.maxaramos.springwstestclient.client;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -9,6 +12,8 @@ import com.maxaramos.springwstest.user.AddUserRequest;
 import com.maxaramos.springwstest.user.AddUserResponse;
 import com.maxaramos.springwstest.user.DeleteUserRequest;
 import com.maxaramos.springwstest.user.DeleteUserResponse;
+import com.maxaramos.springwstest.user.GetAllUserRequest;
+import com.maxaramos.springwstest.user.GetAllUserResponse;
 import com.maxaramos.springwstest.user.GetUserRequest;
 import com.maxaramos.springwstest.user.GetUserResponse;
 import com.maxaramos.springwstest.user.ObjectFactory;
@@ -26,6 +31,13 @@ public class UserClient {
 	@Autowired
 	@Qualifier("userObjectFactory")
 	private ObjectFactory objectFactory;
+
+	public List<User> getAllUser() {
+		GetAllUserRequest request = objectFactory.createGetAllUserRequest();
+
+		GetAllUserResponse response = (GetAllUserResponse) webServiceTemplate.marshalSendAndReceive(request);
+		return response.getUsers().stream().map(userType -> fromUserType(userType)).collect(Collectors.toList());
+	}
 
 	public User addUser(User user) {
 		AddUserRequest request = objectFactory.createAddUserRequest();
@@ -85,6 +97,14 @@ public class UserClient {
 
 	public static User fromResponse(UpdateUserResponse response) {
 		UserType userType = response.getUser();
+		User user = new User();
+		user.setId(userType.getId());
+		user.setUsername(userType.getUsername());
+		user.setPassword(userType.getPassword());
+		return user;
+	}
+
+	public User fromUserType(UserType userType) {
 		User user = new User();
 		user.setId(userType.getId());
 		user.setUsername(userType.getUsername());

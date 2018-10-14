@@ -1,5 +1,8 @@
 package com.maxaramos.springwstestclient.client;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -12,6 +15,8 @@ import com.maxaramos.springwstest.address.DeleteAddressRequest;
 import com.maxaramos.springwstest.address.DeleteAddressResponse;
 import com.maxaramos.springwstest.address.GetAddressRequest;
 import com.maxaramos.springwstest.address.GetAddressResponse;
+import com.maxaramos.springwstest.address.GetAllAddressRequest;
+import com.maxaramos.springwstest.address.GetAllAddressResponse;
 import com.maxaramos.springwstest.address.ObjectFactory;
 import com.maxaramos.springwstest.address.UpdateAddressRequest;
 import com.maxaramos.springwstest.address.UpdateAddressResponse;
@@ -26,6 +31,13 @@ public class AddressClient {
 	@Autowired
 	@Qualifier("addressObjectFactory")
 	private ObjectFactory objectFactory;
+
+	public List<Address> getAllAddress() {
+		GetAllAddressRequest request = objectFactory.createGetAllAddressRequest();
+
+		GetAllAddressResponse response = (GetAllAddressResponse) webServiceTemplate.marshalSendAndReceive(request);
+		return response.getAddresses().stream().map(addressType -> fromAddressType(addressType)).collect(Collectors.toList());
+	}
 
 	public Address addAddress(Address address) {
 		AddAddressRequest request = objectFactory.createAddAddressRequest();
@@ -101,6 +113,18 @@ public class AddressClient {
 
 	public static Address fromResponse(UpdateAddressResponse response) {
 		AddressType addressType = response.getAddress();
+		Address address = new Address();
+		address.setId(addressType.getId());
+		address.setAddress1(addressType.getAddress1());
+		address.setAddress2(addressType.getAddress2());
+		address.setCity(addressType.getCity());
+		address.setState(addressType.getState());
+		address.setCountry(addressType.getCountry());
+		address.setZipCode(addressType.getZipCode());
+		return address;
+	}
+
+	public Address fromAddressType(AddressType addressType) {
 		Address address = new Address();
 		address.setId(addressType.getId());
 		address.setAddress1(addressType.getAddress1());

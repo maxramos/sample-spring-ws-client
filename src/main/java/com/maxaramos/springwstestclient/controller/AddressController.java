@@ -1,5 +1,7 @@
 package com.maxaramos.springwstestclient.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,12 @@ public class AddressController {
 
 	@Autowired
 	private AddressClient addressClient;
+
+	@GetMapping("/getAll")
+	public List<Address> getAll() {
+		log.info("getAll");
+		return addressClient.getAllAddress();
+	}
 
 	@PutMapping("/add")
 	public Address add(@RequestBody Address address) {
