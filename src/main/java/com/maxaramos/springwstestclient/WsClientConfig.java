@@ -1,5 +1,6 @@
 package com.maxaramos.springwstestclient;
 
+import org.springframework.boot.webservices.client.WebServiceTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -11,13 +12,13 @@ import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 public class WsClientConfig {
 
 	@Bean
-	public WebServiceTemplate webServiceTemplate() {
-		WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
-		webServiceTemplate.setMarshaller(jaxb2Marshaller());
-		webServiceTemplate.setUnmarshaller(jaxb2Marshaller());
-		webServiceTemplate.setDefaultUri("http://localhost:8080/services");
-		webServiceTemplate.setInterceptors(new ClientInterceptor[] { securityInterceptor() });
-		return webServiceTemplate;
+	public WebServiceTemplate webServiceTemplate(WebServiceTemplateBuilder builder) {
+		return builder
+			.setMarshaller(jaxb2Marshaller())
+			.setUnmarshaller(jaxb2Marshaller())
+			.setDefaultUri("http://localhost:8080/services")
+			.interceptors(new ClientInterceptor[] { securityInterceptor() })
+			.build();
 	}
 
 	@Bean
