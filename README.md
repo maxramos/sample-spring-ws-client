@@ -1,1 +1,1 @@
-# spring-ws-test-client
+# sample-spring-ws-client

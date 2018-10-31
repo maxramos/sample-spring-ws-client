@@ -1,36 +1,33 @@
-package com.maxaramos.springwstestclient.client;
+package com.maxaramos.samplespringwsclient.client;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import com.maxaramos.springwstest.address.AddAddressRequest;
-import com.maxaramos.springwstest.address.AddAddressResponse;
-import com.maxaramos.springwstest.address.AddressType;
-import com.maxaramos.springwstest.address.DeleteAddressRequest;
-import com.maxaramos.springwstest.address.DeleteAddressResponse;
-import com.maxaramos.springwstest.address.GetAddressRequest;
-import com.maxaramos.springwstest.address.GetAddressResponse;
-import com.maxaramos.springwstest.address.GetAllAddressRequest;
-import com.maxaramos.springwstest.address.GetAllAddressResponse;
-import com.maxaramos.springwstest.address.ObjectFactory;
-import com.maxaramos.springwstest.address.UpdateAddressRequest;
-import com.maxaramos.springwstest.address.UpdateAddressResponse;
-import com.maxaramos.springwstestclient.model.Address;
+import com.maxaramos.samplespringws.address.AddAddressRequest;
+import com.maxaramos.samplespringws.address.AddAddressResponse;
+import com.maxaramos.samplespringws.address.AddressType;
+import com.maxaramos.samplespringws.address.DeleteAddressRequest;
+import com.maxaramos.samplespringws.address.DeleteAddressResponse;
+import com.maxaramos.samplespringws.address.GetAddressRequest;
+import com.maxaramos.samplespringws.address.GetAddressResponse;
+import com.maxaramos.samplespringws.address.GetAllAddressRequest;
+import com.maxaramos.samplespringws.address.GetAllAddressResponse;
+import com.maxaramos.samplespringws.address.ObjectFactory;
+import com.maxaramos.samplespringws.address.UpdateAddressRequest;
+import com.maxaramos.samplespringws.address.UpdateAddressResponse;
+import com.maxaramos.samplespringwsclient.model.Address;
 
 @Component
 public class AddressClient {
 
-	@Autowired
-	private WebServiceTemplate webServiceTemplate;
+	private ObjectFactory objectFactory = new ObjectFactory();
 
 	@Autowired
-	@Qualifier("addressObjectFactory")
-	private ObjectFactory objectFactory;
+	private WebServiceTemplate webServiceTemplate;
 
 	public List<Address> getAllAddress() {
 		GetAllAddressRequest request = objectFactory.createGetAllAddressRequest();

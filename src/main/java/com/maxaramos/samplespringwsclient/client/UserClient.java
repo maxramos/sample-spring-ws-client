@@ -1,36 +1,33 @@
-package com.maxaramos.springwstestclient.client;
+package com.maxaramos.samplespringwsclient.client;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import com.maxaramos.springwstest.user.AddUserRequest;
-import com.maxaramos.springwstest.user.AddUserResponse;
-import com.maxaramos.springwstest.user.DeleteUserRequest;
-import com.maxaramos.springwstest.user.DeleteUserResponse;
-import com.maxaramos.springwstest.user.GetAllUserRequest;
-import com.maxaramos.springwstest.user.GetAllUserResponse;
-import com.maxaramos.springwstest.user.GetUserRequest;
-import com.maxaramos.springwstest.user.GetUserResponse;
-import com.maxaramos.springwstest.user.ObjectFactory;
-import com.maxaramos.springwstest.user.UpdateUserRequest;
-import com.maxaramos.springwstest.user.UpdateUserResponse;
-import com.maxaramos.springwstest.user.UserType;
-import com.maxaramos.springwstestclient.model.User;
+import com.maxaramos.samplespringws.user.AddUserRequest;
+import com.maxaramos.samplespringws.user.AddUserResponse;
+import com.maxaramos.samplespringws.user.DeleteUserRequest;
+import com.maxaramos.samplespringws.user.DeleteUserResponse;
+import com.maxaramos.samplespringws.user.GetAllUserRequest;
+import com.maxaramos.samplespringws.user.GetAllUserResponse;
+import com.maxaramos.samplespringws.user.GetUserRequest;
+import com.maxaramos.samplespringws.user.GetUserResponse;
+import com.maxaramos.samplespringws.user.ObjectFactory;
+import com.maxaramos.samplespringws.user.UpdateUserRequest;
+import com.maxaramos.samplespringws.user.UpdateUserResponse;
+import com.maxaramos.samplespringws.user.UserType;
+import com.maxaramos.samplespringwsclient.model.User;
 
 @Component
 public class UserClient {
 
-	@Autowired
-	private WebServiceTemplate webServiceTemplate;
+	private ObjectFactory objectFactory = new ObjectFactory();
 
 	@Autowired
-	@Qualifier("userObjectFactory")
-	private ObjectFactory objectFactory;
+	private WebServiceTemplate webServiceTemplate;
 
 	public List<User> getAllUser() {
 		GetAllUserRequest request = objectFactory.createGetAllUserRequest();

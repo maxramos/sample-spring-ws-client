@@ -1,4 +1,4 @@
-package com.maxaramos.springwstestclient.controller;
+package com.maxaramos.samplespringwsclient.controller;
 
 import java.util.List;
 
@@ -13,47 +13,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maxaramos.springwstestclient.client.AddressClient;
-import com.maxaramos.springwstestclient.model.Address;
+import com.maxaramos.samplespringwsclient.client.UserClient;
+import com.maxaramos.samplespringwsclient.model.User;
 
 @RestController
-@RequestMapping("/address")
-public class AddressController {
+@RequestMapping("/user")
+public class UserController {
 
 	@Autowired
 	private Logger log;
 
 	@Autowired
-	private AddressClient addressClient;
+	private UserClient userClient;
 
 	@GetMapping("/getAll")
-	public List<Address> getAll() {
+	public List<User> getAll() {
 		log.info("getAll");
-		return addressClient.getAllAddress();
+		return userClient.getAllUser();
 	}
 
 	@PutMapping("/add")
-	public Address add(@RequestBody Address address) {
-		log.info("add: " + address);
-		return addressClient.addAddress(address);
+	public User add(@RequestBody User user) {
+		log.info("add: " + user);
+		return userClient.addUser(user);
 	}
 
 	@GetMapping("/get")
-	public Address get(@RequestParam("id") Long id) {
+	public User get(@RequestParam("id") Long id) {
 		log.info("get: " + id);
-		return addressClient.getAddress(id);
+		return userClient.getUser(id);
 	}
 
 	@PostMapping("/update")
-	public Address update(@RequestBody Address address) {
-		log.info("update: " + address);
-		return addressClient.updateAddress(address);
+	public User update(@RequestBody User user) {
+		log.info("update: " + user);
+		return userClient.updateUser(user);
 	}
 
 	@DeleteMapping("/delete")
 	public boolean delete(@RequestParam("id") Long id) {
 		log.info("delete: " + id);
-		return addressClient.deleteAddress(id);
+		return userClient.deleteUser(id);
 	}
 
 }

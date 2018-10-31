@@ -1,4 +1,4 @@
-package com.maxaramos.springwstestclient.model;
+package com.maxaramos.samplespringwsclient.model;
 
 import java.io.Serializable;
 

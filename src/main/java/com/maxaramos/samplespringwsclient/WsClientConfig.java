@@ -1,6 +1,5 @@
-package com.maxaramos.springwstestclient;
+package com.maxaramos.samplespringwsclient;
 
-import org.springframework.boot.webservices.client.WebServiceTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -12,19 +11,19 @@ import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 public class WsClientConfig {
 
 	@Bean
-	public WebServiceTemplate webServiceTemplate(WebServiceTemplateBuilder builder) {
-		return builder
-			.setMarshaller(jaxb2Marshaller())
-			.setUnmarshaller(jaxb2Marshaller())
-			.setDefaultUri("http://localhost:8080/services")
-			.interceptors(new ClientInterceptor[] { securityInterceptor() })
-			.build();
+	public WebServiceTemplate webServiceTemplate() {
+		WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
+		webServiceTemplate.setMarshaller(jaxb2Marshaller());
+		webServiceTemplate.setUnmarshaller(jaxb2Marshaller());
+		webServiceTemplate.setDefaultUri("http://localhost:8080/services");
+		webServiceTemplate.setInterceptors(new ClientInterceptor[] { securityInterceptor() });
+		return webServiceTemplate;
 	}
 
 	@Bean
 	public Jaxb2Marshaller jaxb2Marshaller() {
 		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-		jaxb2Marshaller.setContextPaths("com.maxaramos.springwstest.user", "com.maxaramos.springwstest.address");
+		jaxb2Marshaller.setContextPaths("com.maxaramos.samplespringws.user", "com.maxaramos.samplespringws.address");
 		return jaxb2Marshaller;
 	}
 
@@ -35,16 +34,6 @@ public class WsClientConfig {
 		securityInterceptor.setSecurementUsername("mramos");
 		securityInterceptor.setSecurementPassword("changeit");
 		return securityInterceptor;
-	}
-
-	@Bean
-	public com.maxaramos.springwstest.user.ObjectFactory userObjectFactory() {
-		return new com.maxaramos.springwstest.user.ObjectFactory();
-	}
-
-	@Bean
-	public com.maxaramos.springwstest.address.ObjectFactory addressObjectFactory() {
-		return new com.maxaramos.springwstest.address.ObjectFactory();
 	}
 
 }

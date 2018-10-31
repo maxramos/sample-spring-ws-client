@@ -1,4 +1,4 @@
-package com.maxaramos.springwstestclient;
+package com.maxaramos.samplespringwsclient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
